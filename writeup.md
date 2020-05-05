@@ -66,12 +66,15 @@ At the end of the `hough_lines`, I called my improved draw line function `cum_av
 #### Improved Draw Lines Comparing Previous Results
 `cum_ave_lines` calls for two more function called `process_lines_ave` and `sort_lines_compare_ave`. 
 
-`cum_ave_lines` call `sort_lines_compare_ave` first, where the output of `hough_lines` is first discarded any lines that have a smaller slope of 0.5, and then sort lines base on their positivity into left and right lane lines. 
-Right after, I compare the current slope of the line to the previous left or right lane slope to see if this slope is within the tolerance of the last slope. If not, it is not counted toward the next averaging calculation. 
-After this sort, I check for an empty result. If the previous step throughout all lines, I assign the previous slope to the current one to eliminate the error.
+`cum_ave_lines` call `sort_lines_compare_ave` first, where the output of `hough_lines` is first fitered out any lines that have a smaller slope of 0.5, and then sort lines base on their positivity into left and right lane lines. 
 
-And then `sort_lines_compare_ave` returns the slope and one point for both extrapolate lines. Now back in `cum_ave_lines`, I check the output result of `sort_lines_compare_ave`. If returns a 0 value slope, draw previous lines. If not, call `process_lines_ave` to average current extrapolate results with the previous result. 
-In `process_lines_ave`, only the previous 50 slopes and bottom X coordinate are averaged by using np.mean and then average again with the current extrapolate result. This is the final result slope and x bottom coordinate. And then draw the final lines to the image.
+Right after, I compare the current slope of the line to the previous left or right lane slope to see if this slope is within the tolerance of the last slope. 
+If not, it is not counted toward the next averaging calculation. 
+After this sort, I check for an empty result. If the previous step discarded all lines, I assign the previous slope to the current one to handle the empty array fitLine error.
+
+And then `sort_lines_compare_ave` returns the slope and one point for each extrapolate lines. Now back in `cum_ave_lines`, I check the output result of `sort_lines_compare_ave`. 
+If it returns a 0 value slope, draw previous lines instead. If not, call `process_lines_ave` to average current extrapolate results with the previous result. 
+In `process_lines_ave`, only the previous 20 slopes and bottom X coordinate are averaged by using np.mean and then average again with the current extrapolate result. This is the final result slope and x bottom coordinate. And then draw the final lines to the image.
 
 `process_lines_ave` is called twice for both lanes in the `cum_ave_lines`
 
@@ -79,7 +82,7 @@ In `process_lines_ave`, only the previous 50 slopes and bottom X coordinate are 
 ### 2. Identify potential shortcomings with your current pipeline
 
 **Known Bugs of current pipeline**
-1. If the current group of lines are all outside the previous slope tolerance, the extrapolate result would be based on the last result. If this keeps happening in a couple of iteration, the extrapolate result would be inaccurate.
+1. If the current group of lines are all outside the previous slope tolerance, the extrapolate result would be based on the last result. If this keeps happening for a couple of iteration, the extrapolate result would be inaccurate.
 2. If the first 20 iterations are not clean and stable images, the whole pipeline will not work.
 3. The pipeline would disappear after a couple of iteration in the challenge video.
 
@@ -97,4 +100,6 @@ In `process_lines_ave`, only the previous 50 slopes and bottom X coordinate are 
 A possible improvement is to debug the challenge video frame by frame and monitor variables to see what is causing the lines to disappear after a couple of iteration. 
 
 Another improvement is to set up a more sophisticated feedback logic to adapt the current slope and bottom X calculation. Instead of averaging current with all previous results, have an active negative feedback loop to compensate for slope change.
+
+The final improvement could be turning hough and canny parameter to every different video input. This would ensure the output of houge line be less noisy for the average to work better. 
 
