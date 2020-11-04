@@ -63,13 +63,13 @@ Below video shown the lane lines after averaging previous results:
 Udacity Review Feedback
 ---
 ### Possible Pipeline Improvements
-####Color Space
+#### Color Space
 
 You may use `cv2.cvtColor` to convert the RGB color space to HSV or HSL color space and create different mask filter for both yellow and white lines as that will help to better detect the lines under different conditions and can be used to implement the challenge video. You may go through this helpful resource that explains the variations in detection when using different color spaces.
-####Canny Edge Detection
+#### Canny Edge Detection
 Canny Edge Detection: In this portion of the pipeline, there are two main parameters you can tune: lower threshold and higher threshold. Your parameters here seem reasonable. If you want to play around with some more parameters here, check out this link. The tutorial in the link will describe a common method for choosing threshold in Canny Edge Detection.
 
-###Reflection describes the current pipeline
+### Reflection describes the current pipeline
 
 Excellent insights have been pointed out and you are on the right path. It is interesting to point out the need to detect curved lanes.
 
