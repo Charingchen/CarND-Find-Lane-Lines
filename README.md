@@ -56,3 +56,6 @@ Below is a output video showing only result of hugh lines and no accumulated ave
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Yk-V84GiKRg/0.jpg)](https://www.youtube.com/watch?v=Yk-V84GiKRg)
 
+Below video shown the lane lines after averaging previous results:
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/GLhxYWYur40/0.jpg)](https://www.youtube.com/watch?v=GLhxYWYur40)
