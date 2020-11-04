@@ -51,10 +51,8 @@ To achieve the final result shown in the first picture, the following image proc
     
     ![png](./P1_md/output_19_1.png)![png](./P1_md/output_19_2.png)
     
+Now it ready to apply this logic to process driving videos. In order to get a stable and not jumping around output, previous frames lines is required. If the current lines has big difference of location and slopes compare to the previous lines' location, the current line should not be accumulated to the result.
+Below is a output video showing only result of hugh lines and no accumulated average calculations
 
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="path/to/poster_image.png">
-    <source src="./test_videos_output/solidWhiteRight.mp4" type="video/mp4">
-  </video>
-</figure>
-    
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Yk-V84GiKRg/0.jpg)](https://www.youtube.com/watch?v=Yk-V84GiKRg)
+
